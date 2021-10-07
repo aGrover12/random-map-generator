@@ -15,53 +15,29 @@ namespace MazeBuilder.Test
 
         public MazeServiceTest()
         {
-            var doorService = new DoorService();
-            _roomService = new RoomService(doorService);
-            _mazeService = new MazeService(_roomService);
+            _mazeService = new MazeService();
         }
+
+
         [Fact]
-        public void ShouldCreateMazeOfAtleast20Rooms()
+        public void ShouldReturnAGrid()
         {
-            var rooms = _mazeService.CreateMaze();
-            Assert.IsType<Room>(rooms.First());
-            Assert.Equal(20, rooms.Count());
+            var maze = new Maze();
+            Assert.IsType<Room[,]>(maze);
         }
 
         [Fact]
-        public void ShouldHaveMazeWhereEachRoomIsConnected()
+        public void ShouldHaveAStartingRoom()
         {
-            var maze = _mazeService.CreateMaze();
-            var linkedRoomCount = 0;
-            for(var i = 0; i < maze.Count()-1; i++)
-            {
-                foreach(var door in maze[i].Doors)
-                {
-                    var oppositeDoor = FindOppositeDirection(door.Direction);
-                    if (!maze[i + 1].Doors.Any(door => door.Direction == oppositeDoor))
-                        continue;
-                    else
-                    {
-                        linkedRoomCount++;
-                        break;
-                    }
-                }
-            }
-             Assert.Equal(maze.Count()-1, linkedRoomCount);
+            var maze = new Maze();
+            Assert.IsType<Room>(maze.StartRoom);
         }
 
-        private string FindOppositeDirection(string direction)
+        [Fact]
+        public void ShouldHaveAnEndRoom()
         {
-            switch (direction)
-            {
-                case "North":
-                    return "South";
-                case "South":
-                    return "North";
-                case "East":
-                    return "West";
-                default:
-                    return "East";
-            }
+            var maze = new Maze();
+            Assert.IsType<Room>(maze.EndRoom);
         }
     }
 }

@@ -8,6 +8,6 @@ namespace MazeBuilder.Core
 {
     public interface IDoorService
     {
-        public Door CreateDoor();
+        public string CreateDoor();
     }   
 }

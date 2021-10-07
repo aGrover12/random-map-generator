@@ -9,7 +9,6 @@ namespace MazeBuilder.Data
         {
         }
 
-        public int Walls { get; set; } = 4;
-        public List<Door> Doors { get; set; }
+        public List<string> Doors { get; set; } = new List<string>() { "North"};
     }
 }

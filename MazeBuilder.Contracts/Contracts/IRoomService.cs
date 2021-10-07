@@ -7,6 +7,5 @@ namespace MazeBuilder.Core.Contracts
 {
     public interface IRoomService
     {
-        public Room CreateRoom(string doorDirection);
     }
 }
