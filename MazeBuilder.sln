@@ -5,13 +5,9 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeBuilder.Service", "MazeBuilder\MazeBuilder.Service.csproj", "{DECC37AA-992E-43FB-A1E7-B54C63E72D86}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeBuilder.Repository", "MazeBuilder.Repository\MazeBuilder.Repository.csproj", "{7E80CF32-30AC-4263-86A6-DEF9B7CAF770}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeBuilder.Data", "MazeBuilder.Data\MazeBuilder.Data.csproj", "{17641E3B-631B-4E01-BD6D-36CA144158DC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeBuilder.Test", "MazeBuilder.Test\MazeBuilder.Test.csproj", "{ADDB54AE-C46F-4EF8-AA1B-5A5CDFC5D6B3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeBuilder.Core", "MazeBuilder.Contracts\MazeBuilder.Core.csproj", "{C7D4030C-3D8E-4C65-9691-72952139F171}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +19,6 @@ Global
 		{DECC37AA-992E-43FB-A1E7-B54C63E72D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DECC37AA-992E-43FB-A1E7-B54C63E72D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DECC37AA-992E-43FB-A1E7-B54C63E72D86}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E80CF32-30AC-4263-86A6-DEF9B7CAF770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E80CF32-30AC-4263-86A6-DEF9B7CAF770}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E80CF32-30AC-4263-86A6-DEF9B7CAF770}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E80CF32-30AC-4263-86A6-DEF9B7CAF770}.Release|Any CPU.Build.0 = Release|Any CPU
 		{17641E3B-631B-4E01-BD6D-36CA144158DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{17641E3B-631B-4E01-BD6D-36CA144158DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17641E3B-631B-4E01-BD6D-36CA144158DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +27,6 @@ Global
 		{ADDB54AE-C46F-4EF8-AA1B-5A5CDFC5D6B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADDB54AE-C46F-4EF8-AA1B-5A5CDFC5D6B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADDB54AE-C46F-4EF8-AA1B-5A5CDFC5D6B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7D4030C-3D8E-4C65-9691-72952139F171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7D4030C-3D8E-4C65-9691-72952139F171}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7D4030C-3D8E-4C65-9691-72952139F171}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7D4030C-3D8E-4C65-9691-72952139F171}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MazeBuilder.Contracts\MazeBuilder.Core.csproj" />
     <ProjectReference Include="..\MazeBuilder.Data\MazeBuilder.Data.csproj" />
   </ItemGroup>
 
