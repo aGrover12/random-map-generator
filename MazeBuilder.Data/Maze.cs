@@ -6,8 +6,18 @@ namespace MazeBuilder.Data
 {
     public class Maze
     {
-        public Room[,] RoomGrid { get; set; } 
-        public Room StartRoom { get; set; } = new Room();
-        public Room EndRoom { get; set; } = new Room();
+        public Maze(
+            int roomLimit,
+            int gridWidth,
+            int gridHeight)
+        {
+            RoomLimt = roomLimit;
+            RoomGrid = new Room[gridWidth, gridHeight];
+        }
+
+        public Room[,] RoomGrid { get; private set; }
+        public Room StartRoom { get; set; } = new Room(0,0);
+        public Room EndRoom { get; set; } = new Room(0,0);
+        public int RoomLimt { get; private set; }
     }
 }
