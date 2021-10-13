@@ -59,20 +59,27 @@ namespace MazeBuilder.Test
         }
 
         [Fact]
-        public void ShouldHaveAStartingRoom()
+        public void ShouldHaveAStartRoom()
         {
             var maze = mazeService.CreateMaze();
             Assert.IsType<Room>(maze.StartRoom);
         }
 
         [Fact]
-        public void ShouldContainStartRoomAtLongitudeAndLatitudeEqualToHalfTheSizeOfTheRoomLimit()
+        public void StartRoomShouldHaveOneDoor()
+        {
+            var maze = mazeService.CreateMaze();
+            Assert.Single(maze.StartRoom.Doors); 
+        }
+
+        [Fact]
+        public void ShouldContainStartRoomAtMiddleOfTheRoom()
         {
             var maze = mazeService.CreateMaze(7);
 
-            var halvedLimt = maze.RoomLimt / 2;
+            var halvedSide = maze.RoomGrid.GetLength(0) / 2;
 
-            Assert.True(maze.StartRoom.Latitude == halvedLimt && maze.StartRoom.Longitude == halvedLimt);
+            Assert.True(maze.StartRoom.Latitude == halvedSide && maze.StartRoom.Longitude == halvedSide);
         }
 
         [Fact]

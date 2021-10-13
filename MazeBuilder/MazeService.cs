@@ -7,23 +7,18 @@ namespace MazeBuilder.Service
 {
     public class MazeService
     {
-        public MazeService()
-        {
-        }
-
         public Maze CreateMaze(int roomLimit = 5)
         {
-            var halvedLimit = roomLimit / 2;
-            var side = roomLimit + halvedLimit;
-
+            var side = roomLimit + roomLimit / 2;
             var maze = new Maze(roomLimit, side, side);
-            maze.StartRoom = AddMazeRoom(halvedLimit, halvedLimit);
+            maze.StartRoom = AssignStartRoom(side / 2);
             return maze;
         }
 
         private Room AddMazeRoom(int latitude, int longitude)
-        {
-            return new Room(latitude, longitude);
-        }
+            => new Room(latitude, longitude);
+
+        private Room AssignStartRoom(int side)
+            => AddMazeRoom(side, side);
     }
 }
