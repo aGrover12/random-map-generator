@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace MazeBuilder.Data
@@ -16,8 +17,8 @@ namespace MazeBuilder.Data
         }
 
         public Room[,] RoomGrid { get; private set; }
-        public Room StartRoom { get; set; } = new Room(0,0);
-        public Room EndRoom { get; set; } = new Room(0,0);
+        public Point StartingPoint { get; set; } = new Point();
+        public Point EndingPoint { get; set; } = new Point();
         public int RoomLimt { get; private set; }
     }
 }

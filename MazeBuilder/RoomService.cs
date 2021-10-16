@@ -4,23 +4,26 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using MazeBuilder.Service.Helpers;
+using MazeBuilder.Service.Enums;
 
 namespace MazeBuilder.Service
 {
     public class RoomService
     {
-        public List<string> AddDoors(int amount)
-         => AssignDoors(amount);
+        public List<string> AddDoors(string entrance, int amount)
+         => AssignDoors(entrance, amount);
 
-        private List<string> AssignDoors(int amount)
+        private List<string> AssignDoors(string entrance, int amount)
         {
             var random = new Random();
             var doors = new List<string>();
 
+            doors.Add(DoorHelper.OppositeDoorDirection(entrance));
+
             while (amount > 0)
             {
-                var num = random.Next(1, 5);
-                var direction = Enum.GetName(typeof(Directions), random.Next(1, 5));
+                var direction = Enum.GetName(typeof(DirectionsEnum.Directions), random.Next(0, 4));
                 if (doors.Contains(direction))
                     continue;
                 doors.Add(direction);
@@ -28,7 +31,10 @@ namespace MazeBuilder.Service
             }    
             return doors;
         }
+        public Room EnterRoom()
+        {
+            return new Room();
+        }
 
-        private enum Directions { North = 1, South, West, East }
     }
 }

@@ -2,6 +2,7 @@
 using MazeBuilder.Service;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using Xunit;
@@ -11,9 +12,11 @@ namespace MazeBuilder.Test
     public class MazeServiceTest
     {
         private readonly MazeService mazeService;
+        private readonly RoomService roomService;
         public MazeServiceTest()
         {
-            this.mazeService = new MazeService();
+            this.roomService = new RoomService();
+            this.mazeService = new MazeService(this.roomService);
         }
         [Fact]
         public void ShouldCreateAMaze()
@@ -59,17 +62,19 @@ namespace MazeBuilder.Test
         }
 
         [Fact]
-        public void ShouldHaveAStartRoom()
+        public void ShouldHaveStartPoint()
         {
             var maze = mazeService.CreateMaze();
-            Assert.IsType<Room>(maze.StartRoom);
+            Assert.IsType<Point>(maze.StartingPoint);
         }
 
         [Fact]
         public void StartRoomShouldHaveOneDoor()
         {
             var maze = mazeService.CreateMaze();
-            Assert.Single(maze.StartRoom.Doors); 
+            var startPoint = maze.StartingPoint;
+            var startRoom = maze.RoomGrid[startPoint.X, startPoint.Y];
+            Assert.Single(startRoom.Doors); 
         }
 
         [Fact]
@@ -79,14 +84,20 @@ namespace MazeBuilder.Test
 
             var halvedSide = maze.RoomGrid.GetLength(0) / 2;
 
-            Assert.True(maze.StartRoom.Latitude == halvedSide && maze.StartRoom.Longitude == halvedSide);
+            Assert.True(maze.StartingPoint.X == halvedSide && maze.StartingPoint.Y == halvedSide);
         }
 
         [Fact]
-        public void ShouldHaveAnEndRoom()
+        public void ShouldHaveEndingPoint()
         {
             var maze = mazeService.CreateMaze();
-            Assert.IsType<Room>(maze.EndRoom);
+            Assert.IsType<Point>(maze.EndingPoint);
+        }
+
+        [Fact]
+        public void ShouldHaveConnectedRooms()
+        {
+            Assert.True(false);
         }
     }
 }

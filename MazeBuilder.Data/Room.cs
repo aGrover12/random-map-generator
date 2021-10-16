@@ -5,15 +5,11 @@ namespace MazeBuilder.Data
 {
     public class Room
     {
-        public Room(int latitude, int longitude)
+        public Room(int level = 1)
         {
-            Latitude = latitude;
-            Longitude = longitude;
+            Level = level;
         }
-
-        public int Latitude { get; private set; }
-        public int Longitude { get; private set; }
-
+        public int Level { get; set; }
         public List<string> Doors { get; set; } = new List<string>() { "North"};
     }
 }
