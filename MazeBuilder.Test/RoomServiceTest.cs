@@ -1,5 +1,6 @@
 using MazeBuilder.Data;
 using MazeBuilder.Service;
+using MazeBuilder.Service.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +39,9 @@ namespace MazeBuilder.Test
             var room = new Room();
             var amount = random.Next(1, 4);
 
-            room.Doors = roomService.AddDoors("North", amount);
+            room.Doors = roomService.AddDoors(amount);
 
-            Assert.Equal(amount+1, room.Doors.Count);
+            Assert.Equal(amount, room.Doors.Count);
         }
 
         [Fact]
@@ -50,7 +51,7 @@ namespace MazeBuilder.Test
             var room = new Room();
             var amount = random.Next(1, 4);
 
-            room.Doors = roomService.AddDoors("North", amount);
+            room.Doors = roomService.AddDoors(amount);
 
             Assert.True(room.Doors.GroupBy(doors => doors).All(door => door.Count() == 1));
         }
@@ -60,7 +61,8 @@ namespace MazeBuilder.Test
         {
             var room = new Room();
 
-            room.Doors = roomService.AddDoors("North", 1);
+            room.Doors.Add(DoorHelper.OppositeDoorDirection("North"));
+
             Assert.Contains("South", room.Doors);
         }
 
@@ -68,13 +70,8 @@ namespace MazeBuilder.Test
         public void ShouldDefaultRoomToLevel1()
         {
             var room = new Room();
-            Assert.Equal(1, room.Level);
-        }
 
-        [Fact]
-        public void ShouldReturnARoomWhenRoomEntered()
-        {
-            Assert.IsType<Room>(roomService.EnterRoom());
+            Assert.Equal(1, room.Level);
         }
     }
 }

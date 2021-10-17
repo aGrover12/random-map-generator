@@ -6,20 +6,19 @@ using System.Text;
 using System.Linq;
 using MazeBuilder.Service.Helpers;
 using MazeBuilder.Service.Enums;
+using System.Drawing;
 
 namespace MazeBuilder.Service
 {
     public class RoomService
     {
-        public List<string> AddDoors(string entrance, int amount)
-         => AssignDoors(entrance, amount);
+        public List<string> AddDoors(int amount)
+            => AssignDoors(amount);
 
-        private List<string> AssignDoors(string entrance, int amount)
+        private List<string> AssignDoors(int amount)
         {
             var random = new Random();
             var doors = new List<string>();
-
-            doors.Add(DoorHelper.OppositeDoorDirection(entrance));
 
             while (amount > 0)
             {
@@ -31,10 +30,8 @@ namespace MazeBuilder.Service
             }    
             return doors;
         }
-        public Room EnterRoom()
-        {
-            return new Room();
-        }
 
+        public Room EnterRoom(Maze maze, Point point)
+            => maze.RoomGrid[point.X, point.Y];
     }
 }

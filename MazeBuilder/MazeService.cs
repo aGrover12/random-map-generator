@@ -11,6 +11,7 @@ namespace MazeBuilder.Service
     public class MazeService
     {
         private readonly RoomService roomService;
+        private int availableRooms;
 
         public MazeService(RoomService roomService)
         {
@@ -19,7 +20,9 @@ namespace MazeBuilder.Service
         public Maze CreateMaze(int roomLimit = 5)
         {
             var maze = InitializeMaze(roomLimit);
-            var mazeWithRooms = CreateRooms(maze);
+            availableRooms = roomLimit - 2;
+
+            var mazeWithRooms = AddRoomsToMaze(maze);
             return mazeWithRooms;
         }
 
@@ -27,36 +30,74 @@ namespace MazeBuilder.Service
         {
             var side = roomLimit + roomLimit / 2;
             var maze = new Maze(roomLimit, side, side);
-            maze.StartingPoint = AssignStartPoint(side / 2);
+            maze.StartingPoint = AssignStartingPoint(side / 2);
             return maze;
         }
 
-        private Maze CreateRooms(Maze maze)
+        private Maze AddRoomsToMaze(Maze maze)
         {
-            var completedMaze = maze;
-            var startingPoint = completedMaze.StartingPoint;
-            var random = new Random();
-            var direction = Enum.GetName(typeof(DirectionsEnum.Directions), random.Next(0, 4));
+            var initiaLizedMaze = maze;
+            var startingPoint = initiaLizedMaze.StartingPoint;
 
-            completedMaze.RoomGrid[startingPoint.X, startingPoint.Y] = AddMazeRoom(direction);
+            initiaLizedMaze.RoomGrid[startingPoint.X, startingPoint.Y] = CreateMazeRoom(1);
+            var completedMaze =  ConnectMazeRooms(initiaLizedMaze);
             return completedMaze;
         }
 
-        private Point AssignStartPoint(int side)
+        private Maze ConnectMazeRooms(Maze maze)
+        {
+            var completedMaze = maze;
+            var roomLevel = 1;
+            var random = new Random();
+
+            while (availableRooms > 0)
+            {
+             for(var i = 0; i < completedMaze.RoomGrid.GetLength(0); i++)
+                for(var j = 0; j < completedMaze.RoomGrid.GetLength(1); j++)
+                {
+                    var currentRoom = completedMaze.RoomGrid[i, j];
+                        if (currentRoom?.Level == roomLevel)
+                        {
+                            var maxDoors = availableRooms > 4 ? 4 : availableRooms;
+                            var minDoors = availableRooms > 2 ? 2 : 1;
+
+                            if (maxDoors == 0)
+                                continue;
+
+                            currentRoom.Doors = roomService.AddDoors(random.Next(minDoors, maxDoors));
+                            currentRoom.Doors.ForEach(door => AddMazeRoom(maze, new Point(i, j), door, roomLevel + 1));
+                        }
+                }
+                roomLevel++;
+            }
+
+            return completedMaze;
+        }
+
+        private Point AssignStartingPoint(int side)
             => new Point(side, side);
 
-        private void ConnectNewRoom(Maze maze, Point point, string doorDirection)
+        private void AddMazeRoom(Maze maze, Point point, string doorDirection, int level)
         {
             var newPoint = DoorHelper.FindPointAfterEnteringDoor(point, doorDirection);
-            maze.RoomGrid[newPoint.X, newPoint.Y] = AddMazeRoom(doorDirection);
+            if (maze.RoomGrid[newPoint.X, newPoint.Y] == null)
+            {
+                maze.RoomGrid[newPoint.X, newPoint.Y] = CreateMazeRoom(level); 
+                maze.RoomGrid[newPoint.X, newPoint.Y].Doors.Add(DoorHelper.OppositeDoorDirection(doorDirection));
+
+                if (maze.RoomLimit == 1)
+                    maze.EndingPoint = newPoint;
+                availableRooms--;
+                return;
+            }
+
+            AddDoorToExistingRoom(maze.RoomGrid[newPoint.X, newPoint.Y], doorDirection);
         }
 
-        private Room AddMazeRoom(string doorDirection)
-        {
-            var random = new Random();
-            var room = new Room();
-            room.Doors = roomService.AddDoors(doorDirection, random.Next(1,4));
-            return room;
-        }
+        private void AddDoorToExistingRoom(Room room, string direction)
+            => room.Doors.Add(DoorHelper.OppositeDoorDirection(direction));
+
+        private Room CreateMazeRoom(int level)
+            => new Room(level);
     }
 }

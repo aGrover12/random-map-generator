@@ -10,6 +10,6 @@ namespace MazeBuilder.Data
             Level = level;
         }
         public int Level { get; set; }
-        public List<string> Doors { get; set; } = new List<string>() { "North"};
+        public List<string> Doors { get; set; } = new List<string>();
     }
 }
