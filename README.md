@@ -1,1 +1,1 @@
-# maze-builder
+# random-map-generator
