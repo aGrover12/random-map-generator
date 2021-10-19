@@ -1,14 +1,9 @@
-﻿using MazeBuilder.Data;
-using MazeBuilder;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using MazeBuilder.Service.Helpers;
-using MazeBuilder.Service.Enums;
+﻿using System.Collections.Generic;
+using MapBuilder.Service.Helpers;
 using System.Drawing;
+using MapBuilder.Data;
 
-namespace MazeBuilder.Service
+namespace MapBuilder.Service
 {
     public class RoomService
     {
@@ -30,7 +25,7 @@ namespace MazeBuilder.Service
             return doors;
         }
 
-        public Room EnterRoom(Maze maze, Point point)
-            => maze.RoomGrid[point.X, point.Y];
+        public Room EnterRoom(Map map, Point point)
+            => map.RoomGrid[point.X, point.Y];
     }
 }

@@ -1,10 +1,8 @@
-﻿using MazeBuilder.Service.Enums;
+﻿using MapBuilder.Service.Enums;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
-namespace MazeBuilder.Service.Helpers
+namespace MapBuilder.Service.Helpers
 {
     public static class DoorHelper
     {

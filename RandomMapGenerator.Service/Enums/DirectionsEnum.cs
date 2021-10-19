@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MazeBuilder.Service.Enums
+﻿
+namespace MapBuilder.Service.Enums
 {
     public static class DirectionsEnum
     {

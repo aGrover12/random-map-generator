@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace MazeBuilder.Data
+namespace MapBuilder.Data
 {
     public class Room
     {

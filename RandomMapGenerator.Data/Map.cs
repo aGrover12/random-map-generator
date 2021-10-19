@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
+﻿using System.Drawing;
 
-namespace MazeBuilder.Data
+namespace MapBuilder.Data
 {
-    public class Maze
+    public class Map
     {
-        public Maze(
+        public Map(
             int roomLimit,
             int gridWidth,
             int gridHeight)

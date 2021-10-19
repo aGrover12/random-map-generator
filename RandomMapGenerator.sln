@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeBuilder.Service", "MazeBuilder\MazeBuilder.Service.csproj", "{DECC37AA-992E-43FB-A1E7-B54C63E72D86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RandomMapGenerator.Service", "RandomMapGenerator.Service\RandomMapGenerator.Service.csproj", "{DECC37AA-992E-43FB-A1E7-B54C63E72D86}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeBuilder.Data", "MazeBuilder.Data\MazeBuilder.Data.csproj", "{17641E3B-631B-4E01-BD6D-36CA144158DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RandomMapGenerator.Data", "RandomMapGenerator.Data\RandomMapGenerator.Data.csproj", "{17641E3B-631B-4E01-BD6D-36CA144158DC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeBuilder.Test", "MazeBuilder.Test\MazeBuilder.Test.csproj", "{ADDB54AE-C46F-4EF8-AA1B-5A5CDFC5D6B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RandomMapGenerator.Test", "RandomMapGenerator.Test\RandomMapGenerator.Test.csproj", "{ADDB54AE-C46F-4EF8-AA1B-5A5CDFC5D6B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

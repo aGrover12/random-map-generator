@@ -1,12 +1,12 @@
-using MazeBuilder.Data;
-using MazeBuilder.Service;
-using MazeBuilder.Service.Helpers;
+using MapBuilder.Data;
+using MapBuilder.Service;
+using MapBuilder.Service.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace MazeBuilder.Test
+namespace MapBuilder.Test
 {
     public class RoomServiceTest
     {
