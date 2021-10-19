@@ -65,13 +65,5 @@ namespace MapBuilder.Test
 
             Assert.Contains("South", room.Doors);
         }
-
-        [Fact]
-        public void ShouldDefaultRoomToLevel1()
-        {
-            var room = new Room();
-
-            Assert.Equal(1, room.Level);
-        }
     }
 }

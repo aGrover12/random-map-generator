@@ -36,7 +36,7 @@ namespace MapBuilder.Service
             var initiaLizedMap = map;
             var startingPoint = initiaLizedMap.StartingPoint;
 
-            initiaLizedMap.RoomGrid[startingPoint.X, startingPoint.Y] = CreateMapRoom(1);
+            initiaLizedMap.RoomGrid[startingPoint.X, startingPoint.Y] = CreateMapRoom();
             var completedMap =  ConnectMapRooms(initiaLizedMap);
             return completedMap;
         }
@@ -54,30 +54,29 @@ namespace MapBuilder.Service
                 {
                     var currentRoom = completedMap.RoomGrid[i, j];
 
-                        if (currentRoom?.Level == roomLevel)
+                        if (currentRoom != null)
                         {
                             var roomPoint = new Point(i, j);
                             var maxDoors = availableRooms > 4 ? 4 : availableRooms;
 
                             if (maxDoors == 1)
                             {
-                                CreateEndingRoom(map, roomPoint, roomLevel);
+                                CreateEndingRoom(map, roomPoint);
                                 continue;
                             }
                             else if (maxDoors == 0)
                                 continue;
 
                             currentRoom.Doors = roomService.AddDoors(random.Next(2, maxDoors));
-                            currentRoom.Doors.ForEach(door => AddMapRoom(completedMap, roomPoint, door, roomLevel + 1));
+                            currentRoom.Doors.ForEach(door => AddMapRoom(completedMap, roomPoint, door));
                         }
                 }
-                roomLevel++;
             }
 
             return completedMap;
         }
 
-        private void CreateEndingRoom(Map map, Point point, int level)
+        private void CreateEndingRoom(Map map, Point point)
         {
             while(true)
             {
@@ -86,7 +85,7 @@ namespace MapBuilder.Service
                 if (map.RoomGrid[newPoint.X, newPoint.Y] != null)
                     continue;
                 map.EndingPoint = newPoint;
-                map.RoomGrid[newPoint.X, newPoint.Y] = CreateMapRoom(level);
+                map.RoomGrid[newPoint.X, newPoint.Y] = CreateMapRoom();
                 availableRooms--;
                 return;
             }
@@ -95,12 +94,12 @@ namespace MapBuilder.Service
         private Point AssignPoint(int side)
             => new Point(side, side);
 
-        private void AddMapRoom(Map map, Point point, string doorDirection, int level)
+        private void AddMapRoom(Map map, Point point, string doorDirection)
         {
             var newPoint = DoorHelper.FindPointAfterEnteringDoor(point, doorDirection);
             if (map.RoomGrid[newPoint.X, newPoint.Y] == null)
             {
-                map.RoomGrid[newPoint.X, newPoint.Y] = CreateMapRoom(level); 
+                map.RoomGrid[newPoint.X, newPoint.Y] = CreateMapRoom(); 
                 map.RoomGrid[newPoint.X, newPoint.Y].Doors.Add(DoorHelper.OppositeDoorDirection(doorDirection));
                 availableRooms--;
                 return;
@@ -112,7 +111,7 @@ namespace MapBuilder.Service
         private void AddDoorToExistingRoom(Room room, string direction)
             => room.Doors.Add(DoorHelper.OppositeDoorDirection(direction));
 
-        private Room CreateMapRoom(int level)
-            => new Room(level);
+        private Room CreateMapRoom()
+            => new Room();
     }
 }
