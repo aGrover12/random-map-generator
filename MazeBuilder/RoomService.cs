@@ -17,12 +17,11 @@ namespace MazeBuilder.Service
 
         private List<string> AssignDoors(int amount)
         {
-            var random = new Random();
             var doors = new List<string>();
 
             while (amount > 0)
             {
-                var direction = Enum.GetName(typeof(DirectionsEnum.Directions), random.Next(0, 4));
+                var direction = DoorHelper.FindDoorDirection();
                 if (doors.Contains(direction))
                     continue;
                 doors.Add(direction);

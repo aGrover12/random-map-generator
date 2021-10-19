@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MazeBuilder.Service.Enums;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
@@ -41,7 +42,7 @@ namespace MazeBuilder.Service.Helpers
                     newPoint = new Point(point.X, point.Y - 1);
                     break;
                 case "East":
-                    newPoint = new Point(point.X + 1, point.Y + 1);
+                    newPoint = new Point(point.X + 1, point.Y);
                     break;
                 case "West":
                     newPoint = new Point(point.X - 1 , point.Y);
@@ -49,6 +50,12 @@ namespace MazeBuilder.Service.Helpers
             }
 
             return newPoint;
+        }
+
+        public static string FindDoorDirection()
+        {
+            var random = new Random();
+            return Enum.GetName(typeof(DirectionsEnum.Directions), random.Next(0, 4));
         }
     }
 }

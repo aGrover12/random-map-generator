@@ -30,7 +30,7 @@ namespace MazeBuilder.Service
         {
             var side = roomLimit + roomLimit / 2;
             var maze = new Maze(roomLimit, side, side);
-            maze.StartingPoint = AssignStartingPoint(side / 2);
+            maze.StartingPoint = AssignPoint(side / 2);
             return maze;
         }
 
@@ -56,16 +56,22 @@ namespace MazeBuilder.Service
                 for(var j = 0; j < completedMaze.RoomGrid.GetLength(1); j++)
                 {
                     var currentRoom = completedMaze.RoomGrid[i, j];
+
                         if (currentRoom?.Level == roomLevel)
                         {
+                            var roomPoint = new Point(i, j);
                             var maxDoors = availableRooms > 4 ? 4 : availableRooms;
-                            var minDoors = availableRooms > 2 ? 2 : 1;
 
-                            if (maxDoors == 0)
+                            if (maxDoors == 1)
+                            {
+                                CreateEndingRoom(maze, roomPoint, roomLevel);
+                                continue;
+                            }
+                            else if (maxDoors == 0)
                                 continue;
 
-                            currentRoom.Doors = roomService.AddDoors(random.Next(minDoors, maxDoors));
-                            currentRoom.Doors.ForEach(door => AddMazeRoom(maze, new Point(i, j), door, roomLevel + 1));
+                            currentRoom.Doors = roomService.AddDoors(random.Next(2, maxDoors));
+                            currentRoom.Doors.ForEach(door => AddMazeRoom(completedMaze, roomPoint, door, roomLevel + 1));
                         }
                 }
                 roomLevel++;
@@ -74,7 +80,22 @@ namespace MazeBuilder.Service
             return completedMaze;
         }
 
-        private Point AssignStartingPoint(int side)
+        private void CreateEndingRoom(Maze maze, Point point, int level)
+        {
+            while(true)
+            {
+                var direction = DoorHelper.FindDoorDirection();
+                var newPoint = DoorHelper.FindPointAfterEnteringDoor(point, direction);
+                if (maze.RoomGrid[newPoint.X, newPoint.Y] != null)
+                    continue;
+                maze.EndingPoint = newPoint;
+                maze.RoomGrid[newPoint.X, newPoint.Y] = CreateMazeRoom(level);
+                availableRooms--;
+                return;
+            }
+        }
+
+        private Point AssignPoint(int side)
             => new Point(side, side);
 
         private void AddMazeRoom(Maze maze, Point point, string doorDirection, int level)
@@ -84,9 +105,6 @@ namespace MazeBuilder.Service
             {
                 maze.RoomGrid[newPoint.X, newPoint.Y] = CreateMazeRoom(level); 
                 maze.RoomGrid[newPoint.X, newPoint.Y].Doors.Add(DoorHelper.OppositeDoorDirection(doorDirection));
-
-                if (maze.RoomLimit == 1)
-                    maze.EndingPoint = newPoint;
                 availableRooms--;
                 return;
             }
