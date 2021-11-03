@@ -113,5 +113,29 @@ namespace MapBuilder.Test
 
             Assert.Equal(startRoom, roomService.EnterRoom(map, previousPoint));
         }
+
+        [Fact]
+        public void ShouldHaveBlueStartRoom()
+        {
+            var map = mapService.CreateMap();
+            var color = Color.Blue;
+
+            var startingPoint = map.StartingPoint;
+            var startRoom = map.RoomGrid[startingPoint.X, startingPoint.Y];
+
+            Assert.Equal(color, startRoom.Brush.Color);
+        }
+
+        [Fact]
+        public void ShouldHaveYellowEndRoom()
+        {
+            var map = mapService.CreateMap();
+            var color = Color.Yellow;
+
+            var endingPoint = map.EndingPoint;
+            var endRoom = map.RoomGrid[endingPoint.X, endingPoint.Y];
+
+            Assert.Equal(color, endRoom.Brush.Color);
+        }
     }
 }

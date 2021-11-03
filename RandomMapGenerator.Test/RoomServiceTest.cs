@@ -65,5 +65,14 @@ namespace MapBuilder.Test
 
             Assert.Contains("South", room.Doors);
         }
+
+        [Fact]
+        public void ShouldHaveDefaultColorOfRed()
+        {
+            var room = new Room();
+            var color = System.Drawing.Color.Red;
+
+            Assert.Equal(color, room.Brush.Color);
+        }
     }
 }

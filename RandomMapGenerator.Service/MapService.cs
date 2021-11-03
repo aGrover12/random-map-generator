@@ -34,9 +34,11 @@ namespace MapBuilder.Service
         private Map AddRoomsToMap(Map map)
         {
             var initiaLizedMap = map;
+
+            var startingRoomColor = "blue";
             var startingPoint = initiaLizedMap.StartingPoint;
 
-            initiaLizedMap.RoomGrid[startingPoint.X, startingPoint.Y] = CreateMapRoom();
+            initiaLizedMap.RoomGrid[startingPoint.X, startingPoint.Y] = CreateMapRoom(startingRoomColor);
             var completedMap =  ConnectMapRooms(initiaLizedMap);
             return completedMap;
         }
@@ -44,7 +46,6 @@ namespace MapBuilder.Service
         private Map ConnectMapRooms(Map map)
         {
             var completedMap = map;
-            var roomLevel = 1;
             var random = new Random();
 
             while (availableRooms > 0)
@@ -84,8 +85,10 @@ namespace MapBuilder.Service
                 var newPoint = DoorHelper.FindPointAfterEnteringDoor(point, direction);
                 if (map.RoomGrid[newPoint.X, newPoint.Y] != null)
                     continue;
+
+                var endingRoomColor = "yellow";
                 map.EndingPoint = newPoint;
-                map.RoomGrid[newPoint.X, newPoint.Y] = CreateMapRoom();
+                map.RoomGrid[newPoint.X, newPoint.Y] = CreateMapRoom(endingRoomColor);
                 availableRooms--;
                 return;
             }
@@ -99,7 +102,8 @@ namespace MapBuilder.Service
             var newPoint = DoorHelper.FindPointAfterEnteringDoor(point, doorDirection);
             if (map.RoomGrid[newPoint.X, newPoint.Y] == null)
             {
-                map.RoomGrid[newPoint.X, newPoint.Y] = CreateMapRoom(); 
+                var roomColor = "red";
+                map.RoomGrid[newPoint.X, newPoint.Y] = CreateMapRoom(roomColor); 
                 map.RoomGrid[newPoint.X, newPoint.Y].Doors.Add(DoorHelper.OppositeDoorDirection(doorDirection));
                 availableRooms--;
                 return;
@@ -111,7 +115,7 @@ namespace MapBuilder.Service
         private void AddDoorToExistingRoom(Room room, string direction)
             => room.Doors.Add(DoorHelper.OppositeDoorDirection(direction));
 
-        private Room CreateMapRoom()
-            => new Room();
+        private Room CreateMapRoom(string color)
+            => new Room(color);
     }
 }

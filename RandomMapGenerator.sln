@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RandomMapGenerator.Data", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RandomMapGenerator.Test", "RandomMapGenerator.Test\RandomMapGenerator.Test.csproj", "{ADDB54AE-C46F-4EF8-AA1B-5A5CDFC5D6B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomMapGenerator.Client", "RandomMapGenerator.Client\RandomMapGenerator.Client.csproj", "{0C17AA81-B4F9-4635-860D-2A408BC35BCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{ADDB54AE-C46F-4EF8-AA1B-5A5CDFC5D6B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADDB54AE-C46F-4EF8-AA1B-5A5CDFC5D6B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADDB54AE-C46F-4EF8-AA1B-5A5CDFC5D6B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C17AA81-B4F9-4635-860D-2A408BC35BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C17AA81-B4F9-4635-860D-2A408BC35BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C17AA81-B4F9-4635-860D-2A408BC35BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C17AA81-B4F9-4635-860D-2A408BC35BCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
